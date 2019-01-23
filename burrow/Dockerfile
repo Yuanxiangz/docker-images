@@ -15,10 +15,10 @@ ARG LIBC_VERSION=2.28-r0
 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
     wget -q -O /tmp/glibc-${LIBC_VERSION}.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${LIBC_VERSION}/glibc-${LIBC_VERSION}.apk && \
     apk add /tmp/glibc-${LIBC_VERSION}.apk && \
-    rm -f /tmp/glibc-${LIBC_VERSION}.apk
+    rm -f /tmp/glibc-${LIBC_VERSION}.apk && \
+    chmod +x entry.sh
 
-COPY entry.sh /entry.sh && \
-     chmod +x /entry.sh
+COPY entry.sh /entry.sh
 # TO invalidate the cache for the COPY statement below
 ENV BUILDDATE=20190123
 COPY --from=builder /go/src/github.com/linkedin/Burrow/Burrow /usr/bin/Burrow
