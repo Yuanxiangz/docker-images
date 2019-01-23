@@ -1,6 +1,6 @@
 FROM giabar/gb-sbt
 ADD https://github.com/yahoo/kafka-manager/archive/master.zip /
-RUN tar zxvf master.zip &&\
+RUN unzip master.zip &&\
 rm -f master.zip &&\
 mv kafka-manager-master kafkamanager
 WORKDIR /kafkamanager
