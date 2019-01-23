@@ -4,13 +4,13 @@ RUN unzip master.zip &&\
 rm -f master.zip &&\
 mv kafka-manager-master kafkamanager
 WORKDIR /kafkamanager
-RUN ls && sbt clean dist
+RUN sbt clean dist
 
 FROM openjdk:8-jdk-alpine
-COPY --from=0 /kafkamanager/target/universal/kafka-manager*.zip .
-#RUN apk add bash &&\
-#unzip kafka-manager*.zip &&\
-#mv kafka-manager-1.3.3.18 kafka-manager &&\
-#rm -f kafka-manager-1.3.3.18.zip &&\
-#mv kafka-manager /
-#CMD ["/kafka-manager/bin/kafka-manager"]
+COPY --from=0 /kafkamanager/target/universal/kafka-manager-*.zip .
+RUN apk add bash &&\
+unzip kafka-manager-*.zip &&\
+rm -f kafka-manager-*.zip &&\
+mv kafka-manager-* /kafka-manager /
+CMD ["/kafka-manager/bin/kafka-manager"]
+EXPOSE 9000
