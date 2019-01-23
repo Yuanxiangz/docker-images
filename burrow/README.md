@@ -9,3 +9,9 @@ To test the build locally:
 ```sh
 docker build -t yuanxiang/burrow .
 ```
+
+To start the docker:
+
+```sh
+sudo docker run -p 8000:8000 -v ~/burrow.toml:/etc/burrow/burrow.toml -v ~/logs:/logs [imageid]
+```
