@@ -9,14 +9,13 @@ RUN dep ensure && \
     go build
 
 FROM alpine:3.8
-ENTRYPOINT ["/entry.sh"]
+# ENTRYPOINT ["/entry.sh"]
 ARG LIBC_VERSION=2.28-r0
 
 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
     wget -q -O /tmp/glibc-${LIBC_VERSION}.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${LIBC_VERSION}/glibc-${LIBC_VERSION}.apk && \
     apk add /tmp/glibc-${LIBC_VERSION}.apk && \
-    rm -f /tmp/glibc-${LIBC_VERSION}.apk && \
-    chmod +x entry.sh
+    rm -f /tmp/glibc-${LIBC_VERSION}.apk
 
 COPY entry.sh /entry.sh
 # TO invalidate the cache for the COPY statement below
