@@ -5,4 +5,5 @@ RUN tar -xzvf /usr/local/datax.tar.gz -C /usr/local/ \
 RUN echo "deb http://mirrors.ustc.edu.cn/debian stable main contrib non-free" > /etc/apt/sources.list.d/mysqlclient.list \
     && apt-get update \
     && apt-get remove -y binutils \
-    && apt-get install -y mysql-client
+    && apt-get install -y mysql-client \
+    && rm -rf /var/lib/apt/lists/*
